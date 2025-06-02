@@ -1,17 +1,8 @@
-# 🎯 每日習慣與獎勵追蹤 Web App
+# 習慣追蹤與獎勵兌換系統
 
-這是一個 Streamlit 應用，用來建立你的每日習慣追蹤器，可以記錄、得分與兌換獎勵。
+此專案使用 Streamlit 建立每日習慣打卡與獎勵兌換平台，可記錄習慣、分數、自訂獎勵，並附統計圖表。
 
-## 功能
-
-- ✅ 自訂與刪除習慣項目與分數
-- 🎁 自訂與刪除獎勵與兌換所需分數
-- 📊 自動儲存並顯示當前累積分數
-
-## 使用方式
-
-1. 將此專案上傳到 GitHub Repository
-2. 前往 [Streamlit Cloud](https://streamlit.io/cloud)
-3. 建立新 App，選擇 repo 並指定執行檔為 `app.py`
-
-完成後即可在手機與電腦中使用你的專屬 App！
+### 使用方式：
+1. 上傳專案至 GitHub
+2. 登入 [streamlit.io/cloud](https://streamlit.io/cloud)
+3. 點選 Deploy 並選擇你的 repo，即可建立專屬網頁 app
