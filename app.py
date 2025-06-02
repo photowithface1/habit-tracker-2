@@ -8,11 +8,7 @@ DATA_FILE = "habit_web_data.json"
 def default_data():
     return {
         "habits": {},
-        "rewards": {
-            "喝杯珍奶": 10,
-            "看一集影集": 20,
-            "週末外出活動": 50
-        },
+        "rewards": {},
         "score": 0
     }
 
@@ -34,17 +30,44 @@ st.title("🎯 每日習慣與獎勵追蹤")
 # ==== 設定習慣 ====
 st.sidebar.header("📝 新增或修改習慣")
 new_habit = st.sidebar.text_input("習慣名稱")
-new_score = st.sidebar.number_input("分數", min_value=1, step=1)
+new_score = st.sidebar.number_input("習慣分數", min_value=1, step=1)
 if st.sidebar.button("➕ 加入習慣"):
     if new_habit:
         data["habits"][new_habit] = new_score
         save_data(data)
         st.sidebar.success(f"已新增習慣「{new_habit}」")
 
+# 顯示與刪除習慣
+st.sidebar.subheader("🗑 刪除習慣")
+habit_to_delete = st.sidebar.selectbox("選擇要刪除的習慣", [""] + list(data["habits"].keys()))
+if st.sidebar.button("❌ 刪除習慣"):
+    if habit_to_delete:
+        data["habits"].pop(habit_to_delete)
+        save_data(data)
+        st.sidebar.success(f"已刪除習慣「{habit_to_delete}」")
+
+# ==== 設定獎勵 ====
+st.sidebar.header("🎁 新增或修改獎勵")
+new_reward = st.sidebar.text_input("獎勵名稱")
+reward_cost = st.sidebar.number_input("所需分數", min_value=1, step=1)
+if st.sidebar.button("🎯 加入獎勵"):
+    if new_reward:
+        data["rewards"][new_reward] = reward_cost
+        save_data(data)
+        st.sidebar.success(f"已新增獎勵「{new_reward}」")
+
+# 顯示與刪除獎勵
+st.sidebar.subheader("🗑 刪除獎勵")
+reward_to_delete = st.sidebar.selectbox("選擇要刪除的獎勵", [""] + list(data["rewards"].keys()))
+if st.sidebar.button("❌ 刪除獎勵"):
+    if reward_to_delete:
+        data["rewards"].pop(reward_to_delete)
+        save_data(data)
+        st.sidebar.success(f"已刪除獎勵「{reward_to_delete}」")
+
 # ==== 完成習慣打卡 ====
 st.header("✅ 今天完成的習慣")
 total_score = 0
-
 completed = []
 for habit, point in data["habits"].items():
     if st.checkbox(f"{habit}（+{point}分）"):
